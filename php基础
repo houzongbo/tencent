@@ -1,0 +1,7 @@
+1. 数组长度count()
+2. 循环 for($i=0;$i<10;$i++){}
+        foreach($array as $k=>$v)
+3. 判断数组存在某值 in_array(); isset(); array_search();array_key_exists()
+4. array_value输出数组、table中的值
+5. str_split:将字符串分成数组     
+6. implode(分隔符，array)：将数组拼接成字符串
