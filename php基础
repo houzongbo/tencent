@@ -6,3 +6,4 @@
 5. str_split:将字符串分成数组     
 6. implode(分隔符，array)：将数组拼接成字符串
 7. array_flip() 数组反转，可用于去重
+8. [x,y] = [y,x] 数组换位
