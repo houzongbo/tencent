@@ -2,3 +2,5 @@
   1. 两数之和  array_search寻找元素索引
 * 2. 字母异位词分组 array_value输出数组、table中的值
                     str_split:将字符串分成数组     implode(分隔符，array)：将数组拼接成字符串
+                    sort() 对数组进行排序
+  3. 最长连续数列  去重（可以用array_flip 进行数组kv反转实现值的去重）
