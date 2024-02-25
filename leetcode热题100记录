@@ -1,0 +1,4 @@
+一：哈希
+  1. 两数之和  array_search寻找元素索引
+* 2. 字母异位词分组 array_value输出数组、table中的值
+                    str_split:将字符串分成数组     implode(分隔符，array)：将数组拼接成字符串
