@@ -8,10 +8,26 @@
 7. array_flip() 数组反转，可用于去重
 8. [x,y] = [y,x] 数组换位
 9. unset() 删除数组中某值
-
+10. array_push() array_pop()       模拟栈的操作
 字符串
 
 1. 字符串长度  strlen()
 2. str_split:将字符串分成数组    
 3. substr(): 截取字符串
+
+队列
+1. new SplQueue()  普通队列
+        $q -> top()        队头  后
+        $q -> bottom()      队尾  先
+        $q -> isEmpty()
+        $q -> count()        队列节点数
+        $q -> push()        队列加入元素到队头
+        $q -> enqueue()        队列加入元素到队头
+       *$q -> pop()        从队头出元素（栈）
+       *$q -> dequeue()    队尾出元素（队列）     
+2. new SplPriorityQueue()      优先队列
+        $q->insert(x,y)   入队  x是存入的值，y是优先级别
+        $q->extract()        出队
+
+
 
