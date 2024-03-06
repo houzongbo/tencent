@@ -10,6 +10,7 @@
 9. unset() 删除数组中某值
 10. array_push() array_pop()       模拟栈的操作
 11. array_reverse()  翻转数组
+12. array_slice() 取指定范围数组  
 字符串
 
 1. 字符串长度  strlen()
@@ -34,3 +35,4 @@
 类
 1. a = new Class()
 2. global使用全局变量
+3. public声明变量，$this-> 来引用变量
