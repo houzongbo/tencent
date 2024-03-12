@@ -30,3 +30,55 @@
 
 	插入，删除：需要变色，旋转节点
 	应用：hashmap
+
+
+6. 堆排序（大根堆）
+	heapify 和 buildheap。  heapify负责找左子和右子并进行调整； buildheap负责循环从非子节点进行堆调整
+
+
+7. 快速排序
+	partition 和 主函数迭代;		先右侧遍历，再左侧
+
+************************有partition辅助
+     function partition(&$nums, $l, $r){							
+        $p = $nums[$l];
+        while($l < $r){
+            while($l < $r and $nums[$r] >= $p) $r--;
+            $nums[$l] = $nums[$r];
+            while($l < $r and $nums[$l] <= $p) $l++;
+            $nums[$r] = $nums[$l];
+        }
+        $nums[$l] = $p;
+        return $l;
+    }
+
+    function sort(&$nums, $l, $r){
+        if($l >= $r) return;
+        $p = $this->partition($nums, $l, $r);
+        $this->sort($nums, $l, $p - 1);
+        $this->sort($nums, $p+1, $r);
+    }
+
+*****************************	无辅助函数
+	function sort(&$nums, $l, $r){
+        if($l >= $r) return;
+        
+        $p = $nums[$l];
+        $i = $l;
+        $j = $r;
+        while($l <= $r){
+            while($l <= $r and $nums[$l] < $p) $l++;
+            while($l <= $r and $nums[$r] > $p) $r--;
+            if($l <= $r){
+                [$nums[$l], $nums[$r]] = [$nums[$r], $nums[$l]];
+                $l++;
+                $r--;
+            }
+        }
+        $this->sort($nums, $i, $r);
+        $this->sort($nums, $l, $j);
+    }
+
+
+
+	
