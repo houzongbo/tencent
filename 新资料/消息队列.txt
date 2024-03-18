@@ -62,15 +62,37 @@
 	消息顺序：通过key,写入partition是顺序的；但全局顺序需要只有一个partition；消费顺序需要只有一个消费者
 
 	
+高性能（快）：
+	reactor模型
+	
+	磁盘顺序写入：
+
+	写磁盘buffer：pagecache
+
+	
 	零拷贝：sendfile()
 		省去了内核缓冲区与用户缓冲区交互，直接内核缓冲区拷贝到socket发送缓冲区。
 		DMA引擎技术transferTo()
 	
 	批量处理和压缩：消息组压缩发送接收	
 
-	消息可靠性：
-		生产者：3种方法，发送并忘记，同步，异步。 选择异步回调
-		kafka自身：主从分区
-		消费者：offset
+消息可靠性：
+	生产者：3种方法，发送并忘记，同步，异步。 	选择异步回调			ack也分三种 0 1 -1 
+			
+	*kafka自身：磁盘持久化；   主从分区
+
+		主从同步：	主做读写，从只做备份，从和主有一个落后时间，时间小于一定值认为同步ISR
+
+		高水位机制：	高水位HW：日志已提交最大偏移量（ISR中都包含）		leader的高水位代表了分区的高水位
+						leader HW：min（所有isr的leo）。  follower HW： min（自身leo，leader HW）
+				LEO:下一条待写入offset
+
+				同步HW的时候，leader故障，可能数据丢失。
+
+				leader epoch：任期号，每次换leader递增。leader故障重启后不再折断hw
+				
+	
+			
+	消费者：offset
 
 
