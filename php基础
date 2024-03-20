@@ -11,6 +11,9 @@
 10. array_push() array_pop()       模拟栈的操作
 11. array_reverse()  翻转数组
 12. array_slice() 取指定范围数组  
+
+13. 排序        sort； rsort；倒序                asort；按值排序        ksort；按键排序
+
 字符串
 
 1. 字符串长度  strlen()
@@ -39,9 +42,6 @@
 2. new SplPriorityQueue()      优先队列
         $q->insert(x,y)   入队  x是存入的值，y是优先级别
         $q->extract()        出队
-
-
-
 
 
 
