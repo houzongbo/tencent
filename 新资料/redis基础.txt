@@ -106,7 +106,7 @@
 
 	replication缓冲区：master生成rdb到最后slave加载完成期间，master收到的写命令； slave完成rdb后通知master，master发送replication
 
-	主从建立长链接
+	主从建立长链接，命令传播
 
 	增量复制：考虑到主从断联后的一致性问题，从服务器请求主服务器同步，附带了offset。
 
