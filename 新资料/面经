@@ -1,1 +1,15 @@
+1. http1.1 和 2.0 区别
+  ·头部压缩：固定字段如cookie；重复冗余字段；ascII编码转二进制      HPACK算法，霍夫曼编码
+  ·二进制帧：header 和 data
+  ·并发传输：多个stream复用同一条tcp连接；不同stream 帧可以乱序发送，但是同一stream帧有顺序
 
+2. RPC
+  远程过程调用
+
+  服务发现：建立连接，发送请求得先知道ip地址和端口。 比如。http中的dns域名解析系统就是服务发现
+  底层连接形式：tcp长链接  +  连接池
+  传输内容：header+body。 需要序列化技术将内容二进制话（json，protocolbuf）
+
+  proxy，接口透明化；register，注册服务；cluster，路由集群，负载均衡；protocol，远程调用层；monitor，监控层；Serialize，序列化层
+
+  invoker：远程调用的抽象，屏蔽远程调用具体的实现细节，通常和代理层联系
