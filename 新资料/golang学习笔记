@@ -1,1 +1,34 @@
+基础语法
+
+string
+
+strings.Builder          var s string.Builder    s.WriteString()    result := s.String()
+bytes.Buffer
+strings.Join
+strings.Split
+
+sort
+sort.Ints
+sort.Strings
+sort.Floats
+
+1. GMP模型
+
+2. GC原理
+
+3. 内存管理
+
+4. 切片和数组
+
+5. string byte rune
+
+6. map
+
+7. interface
+
+8. reflect
+
+9. channel
+
+10. select
 
