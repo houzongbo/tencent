@@ -1,5 +1,9 @@
 基础语法
 
+math.MaxInt64
+math.MinInt64
+
+
 string
 
 strings.Builder          var s string.Builder    s.WriteString()    result := s.String()
@@ -49,3 +53,11 @@ sort.Floats
 9. channel
 
 10. select
+
+11. error 和 panic
+    错误处理机制
+    error：常规错误，常用
+    panic：崩溃，不可预见的错误。 可以用defer recover捕捉错误，防止程序退出
+
+12. 
+    
