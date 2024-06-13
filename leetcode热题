@@ -83,23 +83,6 @@
   60. 单词搜索    回溯+dfs    
 * 61. 分割回文字串      动态规划 + 回溯          dp[i][j] 判断 i-j是否回文， 双层循环   i 从后往前， j 从i+1往后  $dp[$i][$j] = ($s[$i] == $s[$j]) && $dp[$i + 1][$j - 1];     $j=$i; $j+1
 * 62. N皇后      回溯+判断      **判断思路：  i，j 这个位置上能否放queen   上  左上  右上  
-function valid($arr, $i, $j){
-        $n = count($arr);
-
-        for ($a = 0; $a < $i; $a++) { // 上
-            if ($arr[$a][$j] == 'Q') return false;
-        }
-        for ($a = 0; $a < $j; $a++) { // 左
-            if ($arr[$i][$a] == 'Q') return false;
-        }
-        for($a = $i, $b = $j; $a >= 0 && $b >= 0; $a--, $b--){
-            if ($arr[$a][$b] == 'Q') return false;
-        }
-        for($a = $i, $b = $j; $a >= 0 && $b < $n; $a--, $b++){
-            if ($arr[$a][$b] == 'Q') return false;
-        }
-        return true;
-    }
 
 十一. 二分查找
 * 63. 搜索插入位置    (l + r)/2  => ((r-l)>>1) + l   *l <= r;  m 和 l r 比较  输出l
@@ -183,6 +166,43 @@ function valid($arr, $i, $j){
 
   五。 栈
 * 12. 计算器    sign栈存放1或-1， 栈里先放个1， +:取top为sign， -：取top相反为sign， （：将sign push， ）：pop， 数字的情况下二次循环，拿到运算数字num，ret += sign * num;
+
+  n皇后：
+func solveNQueens(n int)  [][]string {
+    ans := [][]string{}
+    
+    // col 下标代表行, 值代表列
+    // st 下标代表该列是否放皇后
+    col, st := make([]int, n), make([]bool, n)
+    // n*2 是为了防止下标越界
+    // d1 存的是左上右下的对角线
+    // d2 存的是右上左下的对角线
+    d1, d2 := make([]bool, n*2), make([]bool, n*2)
+    var dfs func(int)
+    dfs = func(r int) { // r 代表枚举的行
+        if r == n { // 放完所有皇后了
+            board := make([]string, n)
+            for i, c := range col { // i 是行, c 是列
+                board[i] = strings.Repeat(".", c) + "Q" + strings.Repeat(".", n-1-c)
+            }
+            ans = append(ans, board)
+            return
+        }
+        for c, v := range st {
+            // 对角线的 r-c（左上右下）/r+c（右上左下） 值相同，可以通过这个性质查看是否有皇后在对角线上
+            rc1 := r-c+n // +n 是防止下标越界（出现负数）
+            rc2 := r+c
+            if v == false && d1[rc1] == false && d2[rc2] == false { // 三线都没有皇后才能放
+                col[r] = c // 在 r 行 c 列放了皇后
+                st[c], d1[rc1], d2[rc2] = true, true, true
+                dfs(r+1)
+                st[c], d1[rc1], d2[rc2] = false, false, false
+            }
+        }
+    }
+    dfs(0)
+    return ans
+}
 
 
 
