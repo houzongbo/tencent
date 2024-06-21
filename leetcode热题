@@ -17,7 +17,7 @@
 ** 9. 找到字符串中所有字母异位词    快慢指针    *需要注意每个字母的数量，一个array记录滑块， 一个array记录滑块中每个字母数量
 
 四. 子串
-** 10. 和为K的子数组        前缀和        每次遍历的时候都记录了当前的前缀和以及出现的次数 ，当前前缀和-目标值 = 之前记录的前缀和
+** 10. 和为K的子数组        前缀和   dp[0]=1     每次遍历的时候都记录了当前的前缀和以及出现的次数 ，当前前缀和-目标值 = 之前记录的前缀和
 ** 11. 滑动窗口最大值      *队列   1. 优先队列 用到了SplPriorityQueue      2. 单调队列  SplQueue  维护一个单调减的队列，每次都把比当前小的值pop出来  队尾存大   队头存小
 ** 12. 最小覆盖子串        滑动窗口    用hash判断是否满足子串要求，每次循环满足check的时候，开始二次循环，去更新左边界，更新新子串   **单独写个check函数
 
@@ -302,4 +302,62 @@ func calculate(s string) (ans int) {
         }
     }
     return
+}
+
+单例模式
+package singleton
+import "sync"
+
+// Singleton 是单例模式接口，导出的
+// 通过该接口可以避免 GetInstance 返回一个包私有类型的指针
+type Singleton interface {
+   foo()
+}
+// singleton 是单例模式类，包私有的
+type singleton struct{}
+
+func (s singleton) foo() {}
+
+var (
+   instance *singleton
+   once     sync.Once
+)
+
+// GetInstance 用于获取单例模式对象
+func GetInstance() Singleton {
+   once.Do(func() {
+      instance = &singleton{}
+   })
+
+   return instance
+}
+
+
+颜色分类 快排序
+func sortColors(nums []int)  {
+
+    var helper func(l,r int) 
+    helper = func(l,r int) {
+        if l > r {
+            return 
+        }
+        i, j := l, r
+        p := nums[l]
+        for i <= j {
+            for i <= j && p > nums[i]{
+            i++
+            }
+            for i <= j && p < nums[j]{
+            j--
+            }
+            if i <= j {
+            nums[i],nums[j] = nums[j], nums[i]
+            i++
+            j--
+            }
+        }
+        helper(l, j)
+        helper(i, r)
+    }
+    helper(0, len(nums)-1)
 }
