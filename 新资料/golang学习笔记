@@ -43,21 +43,67 @@ sort.Floats
 4. 切片和数组
 
 5. string byte rune
-
+    byte 一个字节 int8
+    rune utf8编码 占三个字节    int32
+】   
 6. map
+    hmap + bucket： 拉链法
+    
+
+    
+    sync.map线程安全
 
 7. interface
+    iface：tab + data        tab：类型 + 方法集        data： unsafe_pointer
+
+    eface：itype+data 空接口，实现多态
+
+    interface比较： type相同 且 值相同
+
+    interface的nil和指针nil 不相等    类型不同
 
 8. reflect
+    基于interface，先转化为接口类型，再通过接口获取真实类型        TypeOf    Field
+
+    判断切片或map相等 DeepEqual
 
 9. channel
+        缓冲区
 
+        空channel读：    子协程阻塞，主协程死锁
+        关闭的channel读写：  写会直接panic    读会成功，buffer内有数据，ok值为true；    buffer没数据，ok值为false，val是零值  
+
+        channel死锁：1. 子协程永久阻塞，
+                    2. 主协程读空channel    主协程向满channel写入    向关闭channel写入直接panic
 10. select
 
 11. error 和 panic
     错误处理机制
-    error：常规错误，常用
+    error：常规错误，常用    errors.New    errors.Error
     panic：崩溃，不可预见的错误。 可以用defer recover捕捉错误，防止程序退出
 
-12. 
-    
+12. go支持多个返回值
+        FP栈底寄存器，指向函数栈底部 + offset
+
+13. defer函数
+        模拟栈，先进后出。    一个链表每次放入链表头
+
+14. 结构体打印
+    %v： 成员值
+    %+v：成员名称 值
+    %#v：结构体名称 成员名称 值
+
+15. new和make区别
+    1. new返回指针，且没有初始化    make返回值，有初始化
+    2. make只能用在切片 map channel类型
+
+16. main函数执行前：
+        init函数：不能被其他函数调用
+                每个包可以多个init，包内不按顺序，不同包引用按依赖关系顺序执行包内init
+
+17. 若干goroutine， 其中一个panic。 其余goroutine 以及程序都会退出。  需要defer recover恢复
+
+18. 内存逃逸
+    go局部变量指针是安全的，有逃逸分析。 超过函数作用域，会分配到堆
+
+
